@@ -14,7 +14,7 @@
         ?>
 		</select>
 		<br/><br/>
-		<p>Product Name:</h4>
+		<p>Product Name:</p>
 		<input type=text name="ProductName">
 		<input type=submit value="Search">
     </form>
