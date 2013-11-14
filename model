@@ -1,6 +1,6 @@
 <?php
 class Products_model extends CI_Model {
-
+//deklarasi variabel
     var $ProductName = '';
     var $ProductID = '';
     
@@ -9,45 +9,46 @@ class Products_model extends CI_Model {
     }
     
     function get_products(){
-        $query = $this->db->get('products');
+        $query = $this->db->get('products'); //mengakses tabel products
         return $query->result();
     }
 	
+	//mengakses tabel product berdasarkan ProductID
     function get_products_by_id($id){
         $this->db->where('ProductID',$id);
         $query = $this->db->get('products');
         return $query->row();
     }
 	
-	//fungsi untuk mencari data
+	//fungsi pencarian data 
     public function caridata($a, $b){
-        $this->db->like('CategoryID', $a);
-        $this->db->like('ProductName', $b);
+        $this->db->like('CategoryID', $a); //mengecek kesamaan variabel $a dengan CategoryID
+        $this->db->like('ProductName', $b);//mengecek kesamaan variabel $b dengan ProductName
         $query = $this->db->get ('products');
-        return $query->result();
+        return $query->result(); 
     }
         
-    // fungsi untuk menambahkan data masukan
+    // menambahkan data masukan
     function insert_entry(){
         $this->ProductName = $this->input->post('ProductName',true);
         $this->SupplierID = $this->input->post('SupplierID',true);
         return $this->db->insert('products', $this);
     }
 
-    //fungsi untuk mengupdate data masukan
+    // mengupdate data masukan
     function update_entry(){
         $this->ProductName = $this->input->post('ProductName',true);
         $this->SupplierID = $this->input->post('SupplierID',true);
         return $this->db->update('products', $this, array('ProductID' => $this->input->post('id',true)));
     }
 
-    //fungsi untuk menghapus data
+    // menghapus data
     function hapus($id){
         $this->db->where('ProductID',$id);
         return $this->db->delete('products');
     }
     
-    //fungsi untuk mengecek keterangan product
+    // mengecek keterangan product
     function cek_dependensi($id){
         $this->db->where('ProductID',$id);
         $query = $this->db->count_all('products');
